@@ -69,7 +69,16 @@ class LocationMapWindow:
             fontsize=9,
             transform=self.text_ax.transAxes,
         )
-        self._info_text = self.ax.text(0.02, 0.98, "Selected: none", transform=self.ax.transAxes, va="top")
+        self._info_text = self.ax.text(
+            0.01,
+            -0.12,
+            "Selected: none",
+            transform=self.ax.transAxes,
+            va="top",
+            ha="left",
+            clip_on=False,
+            bbox={"facecolor": "white", "edgecolor": "#cccccc", "boxstyle": "round,pad=0.2"},
+        )
 
         self._render()
         self.figure.canvas.mpl_connect("pick_event", self._on_pick)
@@ -77,7 +86,7 @@ class LocationMapWindow:
     @staticmethod
     def _format_rows_text(point_df: pd.DataFrame, limit: int = 22) -> str:
         sorted_df = point_df.sort_values("T")
-        header = "T | V | A | DeltaV | DeltaA"
+        header = f"{'T':>7} | {'V':>8} | {'A':>7} | {'DeltaV':>8} | {'DeltaA':>7}"
         lines = [header]
 
         for _, row in sorted_df.head(limit).iterrows():
@@ -125,7 +134,16 @@ class LocationMapWindow:
         self.ax.clear()
         self._base_scatter = self.ax.scatter(x_values, y_values, s=24, c="#1f77b4", picker=6)
         self._selected_scatter = self.ax.scatter([], [], s=120, facecolors="none", edgecolors="#d62728", linewidths=2)
-        self._info_text = self.ax.text(0.02, 0.98, "Selected: none", transform=self.ax.transAxes, va="top")
+        self._info_text = self.ax.text(
+            0.01,
+            -0.12,
+            "Selected: none",
+            transform=self.ax.transAxes,
+            va="top",
+            ha="left",
+            clip_on=False,
+            bbox={"facecolor": "white", "edgecolor": "#cccccc", "boxstyle": "round,pad=0.2"},
+        )
         self.ax.set_title("Location Map")
         self.ax.set_xlabel("XCoord")
         self.ax.set_ylabel("YCoord")

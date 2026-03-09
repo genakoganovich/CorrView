@@ -40,7 +40,7 @@ def test_location_map_select_point_updates_state_and_label(tmp_path: Path) -> No
     assert app.selected_point == (2.0, 20.0)
     assert "Selected: (2.00, 20.00) | rows: 2" in app._info_text.get_text()
     rows_text = app._rows_text.get_text().splitlines()
-    assert rows_text[0] == "T | V | A | DeltaV | DeltaA"
+    assert rows_text[0] == "      T |        V |       A |   DeltaV |  DeltaA"
     assert rows_text[1].startswith("  0.000")
     assert rows_text[2].startswith("  1.000")
     assert len(app.v_ax.lines) == 3
